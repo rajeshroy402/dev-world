@@ -1,4 +1,10 @@
-#!/bin/bash
+#! /bin/bash
+
+#This is created by Rajesh Roy (rajeshroy402@gmail.com)
+
+echo "This repo is owned and managed by Rajesh Roy <rajeshroy402@gmail.com>"
+
+############################################################
 
 # Get system architecture
 ARCH=$(dpkg --print-architecture)
