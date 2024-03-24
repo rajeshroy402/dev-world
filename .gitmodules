@@ -1,3 +1,6 @@
 [submodule "DeepStream-dGPU-Installation"]
 	path = DeepStream-dGPU-Installation
 	url = https://github.com/rajeshroy402/DeepStream-dGPU-Installation.git
+[submodule "DeepStream-Jetson-Installation"]
+	path = DeepStream-Jetson-Installation
+	url = https://github.com/rajeshroy402/DeepStream-Jetson-Installation.git
