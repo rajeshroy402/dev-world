@@ -1,20 +1,58 @@
-#! /bin/bash
+#!/usr/bin/env bash
+#
+# Bash script to remove old Miniconda references, install fresh Miniconda,
+# initialize conda for bash, and verify that conda works.
+#
+# Usage: 
+#   1) chmod +x fix_conda.sh
+#   2) ./fix_conda.sh
+#
 
-#This is created by Rajesh Roy (rajeshroy402@gmail.com)
+set -e  # Exit immediately if a command exits with a non-zero status
 
-echo "This repo is owned and managed by Rajesh Roy <rajeshroy402@gmail.com>"
+echo "=============================="
+echo " 1. Removing old Miniconda..."
+echo "=============================="
+rm -rf ~/miniconda3
+rm -rf ~/.conda ~/.condarc ~/.continuum
 
-############################################################
+echo
+echo "=============================================="
+echo " 2. Downloading latest Miniconda (Linux 64-bit)"
+echo "=============================================="
+wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh
 
-rm -rf ~/softwares_by_rajesh
-mkdir ~/softwares_by_rajesh
+echo
+echo "======================================"
+echo " 3. Installing Miniconda silently..."
+echo "======================================"
+bash /tmp/miniconda.sh -b -p "$HOME/miniconda3"
 
-cd ~/softwares_by_rajesh
+# Clean up the installer
+rm /tmp/miniconda.sh
 
-wget https://repo.anaconda.com/archive/Anaconda3-2024.02-1-Linux-x86_64.sh
+echo
+echo "=========================================="
+echo " 4. Initializing conda for Bash shell..."
+echo "=========================================="
+# Initialize conda for bash
+"$HOME/miniconda3/bin/conda" init bash
 
-bash ./Anaconda3-2024.02-1-Linux-x86_64.sh
+echo
+echo "========================================"
+echo " 5. Reloading your ~/.bashrc settings..."
+echo "========================================"
+# Reload .bashrc so this shell session has conda
+source ~/.bashrc
 
-echo "We have installed conda in your system. Thanks."
+echo
+echo "=================================="
+echo " 6. Checking 'conda --version'..."
+echo "=================================="
+conda --version
 
-
+echo
+echo "============================================="
+echo " All done! 'conda' should now be on your PATH"
+echo " Try:  conda activate base"
+echo "============================================="
